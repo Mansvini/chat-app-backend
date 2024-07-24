@@ -57,7 +57,7 @@ const addUserSocket = (userId, socketId) => {
   if (!users[userId]) {
     users[userId] = {sockets: []};
   }
-  if (!users[userId]?.sockets?.includes(socketId)) {
+  if (!users[userId].sockets.includes(socketId)) {
     users[userId].sockets.push(socketId);
   }
 };
