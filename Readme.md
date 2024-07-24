@@ -60,7 +60,6 @@ SUPABASE_ANON_KEY=your-supabase-anon-key
 # PUBLIC_FRONTEND_URL=your-frontend-url (optional)
 LOCAL_FRONTEND_URL=http://localhost:3000
 BACKEND_PORT=3001
-NODE_ENV=development (or production)
 ```
 
 ## Contributing
