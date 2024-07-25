@@ -132,12 +132,12 @@ io.on('connection', (socket) => {
 // API- run cron job to delete messages older than 24 hours
 app.get('/api/run-cron-job', async (req, res) => {
   console.log('Running scheduled task to delete old messages');
-  const twentyFourHoursAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-  console.log('Deleting messages older than:', twentyFourHoursAgo);
+  const twentyFourHoursAgo = new Date(Date.now() - 0.25 * 60 * 60 * 1000).toISOString();
+
   const { data, error } = await supabase
     .from('messages')
     .delete()
-    .lt('created_at', new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString());
+    .lt('created_at', twentyFourHoursAgo);
 
   if (error) {
     console.error('Error deleting old messages:', error);
