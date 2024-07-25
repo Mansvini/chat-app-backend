@@ -51,6 +51,8 @@ app.use(expressWinston.logger({
 
 app.use(express.json());
 
+app.set('trust proxy', 1);
+
 const users = {};
 
 const addUserSocket = (userId, socketId) => {
@@ -64,8 +66,8 @@ const addUserSocket = (userId, socketId) => {
 
 const removeUserSocket = (userId, socketId) => {
   if (users[userId]) {
-    users[userId] = users[userId].sockets.filter(id => id !== socketId);
-    if (users[userId].length === 0) {
+    users[userId].sockets = users[userId].sockets.filter(id => id !== socketId);
+    if (users[userId].sockets.length === 0) {
       delete users[userId];
     }
   }
@@ -143,7 +145,7 @@ app.get('/api/run-cron-job', async (req, res) => {
     return res.status(500).json({ success: false, error: 'Failed to delete messages' });
   } else {
     console.log('Old messages deleted successfully', data);
-    return res.status(200).json({ success: true, data });
+    return res.status(200).json({ success: true, message: 'Successfully deleted old messages' });
   }
 });
 
